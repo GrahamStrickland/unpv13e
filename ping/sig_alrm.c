@@ -1,10 +1,8 @@
-#include	"ping.h"
+#include "ping.h"
 
-void
-sig_alrm(int signo)
-{
-	(*pr->fsend)();
+void sig_alrm(int signo) {
+  (*pr->fsend)();
 
-	alarm(1);
-	return;
+  alarm(1);
+  return;
 }
