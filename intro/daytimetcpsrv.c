@@ -2,7 +2,7 @@
 #include <time.h>
 
 int main(int argc, char **argv) {
-  int listenfd, connfd;
+  int listenfd, connfd, i;
   struct sockaddr_in servaddr;
   char buff[MAXLINE];
   time_t ticks;
@@ -23,7 +23,8 @@ int main(int argc, char **argv) {
 
     ticks = time(NULL);
     snprintf(buff, sizeof(buff), "%.24s\r\n", ctime(&ticks));
-    Write(connfd, buff, strlen(buff));
+    for (i = 0; i < strlen(buff); i++)
+      Write(connfd, &buff[i], 1);
 
     Close(connfd);
   }

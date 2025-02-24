@@ -1,8 +1,7 @@
 #include "unp.h"
 
 int main(int argc, char **argv) {
-  int count;
-  int sockfd, n;
+  int sockfd, n, counter = 0;
   char recvline[MAXLINE + 1];
   struct sockaddr_in servaddr;
 
@@ -21,10 +20,8 @@ int main(int argc, char **argv) {
   if (connect(sockfd, (SA *)&servaddr, sizeof(servaddr)) < 0)
     err_sys("connect error");
 
-  count = 0;
   while ((n = read(sockfd, recvline, MAXLINE)) > 0) {
-    if (n > 0)
-      count++;
+    counter++;
     recvline[n] = 0; /* null terminate */
     if (fputs(recvline, stdout) == EOF)
       err_sys("fputs error");
@@ -32,6 +29,6 @@ int main(int argc, char **argv) {
   if (n < 0)
     err_sys("read error");
 
-  printf("%d read(s) > 0\n", count);
+  printf("counter = %d\n", counter);
   exit(0);
 }
