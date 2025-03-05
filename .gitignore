@@ -11,3 +11,7 @@ compile_commands.json
 
 *.lc
 *.lh
+
+# VSCode files
+*.code-workspace
+.vscode
